@@ -12,7 +12,10 @@ public class Contas {
     static ArrayList<ContaBancaria> contas = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
-        int opcao = 0;
+        informarOpcao();
+    }
+
+    private static void informarOpcao() {
         System.out.println(" 1 - Cadastrar Conta Basica"
                 + "  || 2 - Cadastrar Conta Poupanca"
                 + "  || 3 - Cadastrar Conta Especial"
@@ -20,37 +23,54 @@ public class Contas {
                 + "  || 5 - Sacar"
                 + "  || 6 - Listar"
                 + "  || 0 - Sair");
+
+        int opcao = -1;
+
         do {
             System.out.println("Opção: ");
 
-            opcao = entrada.nextInt();
-            switch (opcao) {
-                case 1:
-                    cadastrarContaBasica();
-                    break;
-                case 2:
-                    cadastrarContaPoupanca();
-                    break;
-                case 3:
-                    cadastrarContaEspecial();
-                    break;
-                case 4:
-                    depositar();
-                    break;
-                case 5:
-                    sacar();
-                    break;
-                case 6:
-                    calcularRendimento();
-                    break;
-                case 7:
-                    listarContas();
-                    break;
-                default:
-                    opcao = 0;
+            try {
+                opcao = entrada.nextInt();
+            } catch (Exception e) {
+                System.out.println("Opção inválida: " + entrada.next());
+            }
+
+            try {
+                opcao = executarOpcao(opcao);
+            } catch (Exception e) {
+                System.out.println("Validação: " + e.getMessage());
             }
         } while (opcao != 0);
+    }
 
+    private static int executarOpcao(int opcao) {
+        switch (opcao) {
+            case 1:
+                cadastrarContaBasica();
+                break;
+            case 2:
+                cadastrarContaPoupanca();
+                break;
+            case 3:
+                cadastrarContaEspecial();
+                break;
+            case 4:
+                depositar();
+                break;
+            case 5:
+                sacar();
+                break;
+            case 6:
+                calcularRendimento();
+                break;
+            case 7:
+                listarContas();
+                break;
+            default:
+                opcao = -1;
+                break;
+        }
+        return opcao;
     }
 
     static void cadastrarContaBasica() {
@@ -64,7 +84,7 @@ public class Contas {
 
     private static String inserirNomeCliente() {
         System.out.println("Nome : ");
-        String nome = entrada.nextLine();
+        String nome = entrada.next();
         entrada.nextLine();
         return nome;
     }
@@ -148,13 +168,17 @@ public class Contas {
         }
 
         throw (new Erros()).new ContaNaoEncontrada();
-
     }
 
     private static void listarContas() {
         contas.forEach(c -> {
-            System.out.println(c);
+            String infoConta = String.format("Cliente: %s - Conta: %d - Saldo: %f", c.getNome(), c.getCodigo(), c.getSaldo());
+            System.out.println(infoConta);
         });
+
+        if (contas.isEmpty()) {
+            System.out.println("Não exitem contas cadastradas.");
+        }
     }
 
 }
