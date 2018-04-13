@@ -79,7 +79,7 @@ public class ContaBancaria {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof ContaBancaria)) {
             return false;
         }
         final ContaBancaria other = (ContaBancaria) obj;
