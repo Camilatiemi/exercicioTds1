@@ -13,7 +13,7 @@ public class ContaEspecial extends ContaBancaria {
     float limite = 100f;
 
     public ContaEspecial(String nome, int numero) {
-        super(nome, numero);
+        super(nome, numero, "CONTA ESPECIAL");
     }
 
     @Override

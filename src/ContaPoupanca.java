@@ -14,7 +14,7 @@ public class ContaPoupanca extends ContaBancaria {
     float aliquota = 0.005f;
 
     public ContaPoupanca(String nome, int numero) {
-        super(nome, numero);
+        super(nome, numero, "CONTA POUPANÇA");
     }
 
     public void calcularRendimento() {

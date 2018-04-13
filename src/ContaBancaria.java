@@ -5,6 +5,7 @@
  */
 public class ContaBancaria {
 
+    private String tipoConta = "CONTA BÁSICA";
     private String nome;
     private int codigo;
     private float saldo = 0;
@@ -12,6 +13,19 @@ public class ContaBancaria {
     public ContaBancaria(String nome, int codigo) {
         this.nome = nome;
         this.codigo = codigo;
+    }
+
+    public ContaBancaria(String nome, int codigo, String tipoConta) {
+        this(nome, codigo);
+        this.tipoConta = tipoConta;
+    }
+
+    public String getTipoConta() {
+        return tipoConta;
+    }
+
+    public void setTipoConta(String tipoConta) {
+        this.tipoConta = tipoConta;
     }
 
     public String getNome() {

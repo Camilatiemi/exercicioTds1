@@ -172,7 +172,7 @@ public class Contas {
 
     private static void listarContas() {
         contas.forEach(c -> {
-            String infoConta = String.format("Cliente: %s - Conta: %d - Saldo: %f", c.getNome(), c.getCodigo(), c.getSaldo());
+            String infoConta = String.format("Tipo: %s - Cliente: %s - Conta: %d - Saldo: %f", c.getTipoConta(), c.getNome(), c.getCodigo(), c.getSaldo());
             System.out.println(infoConta);
         });
 
