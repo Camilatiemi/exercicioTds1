@@ -13,15 +13,15 @@ public class Contas {
 
     public static void main(String[] args) throws Exception {
         int opcao = 0;
-        System.out.println(" 1 - Cadastrar Conta Basica" +
-"  || 2 - Cadastrar Conta Poupanca" +
-"  || 3 - Cadastrar Conta Especial" +
-"  || 4 - Depositar" +
-"  || 5 - Sacar" +
-"  || 6 - Listar" +
-"  || 0 - Sair" );  
+        System.out.println(" 1 - Cadastrar Conta Basica"
+                + "  || 2 - Cadastrar Conta Poupanca"
+                + "  || 3 - Cadastrar Conta Especial"
+                + "  || 4 - Depositar"
+                + "  || 5 - Sacar"
+                + "  || 6 - Listar"
+                + "  || 0 - Sair");
         do {
-            System.out.println("Opção: "); 
+            System.out.println("Opção: ");
 
             opcao = entrada.nextInt();
             switch (opcao) {
@@ -41,9 +41,11 @@ public class Contas {
                     sacar();
                     break;
                 case 6:
+                    calcularRendimento();
+                    break;
+                case 7:
                     listarContas();
-//                    calcularRendimento();
-                   break;
+                    break;
                 default:
                     opcao = 0;
             }
@@ -74,7 +76,7 @@ public class Contas {
         return codigo;
     }
 
-    private static void cadastrarConta(ContaBancaria c)  {
+    private static void cadastrarConta(ContaBancaria c) {
         validarClienteCadastrado(c);
 
         contas.add(c);
@@ -99,9 +101,20 @@ public class Contas {
         String nome = inserirNomeCliente();
         int codigo = inserirCodigoConta();
 
-        ContaBancaria c = new ContaEspecial(nome, codigo);
+        ContaEspecial c = new ContaEspecial(nome, codigo);
 
         cadastrarConta(c);
+    }
+
+    private static void calcularRendimento() {
+        int codigo = inserirCodigoConta();
+        ContaBancaria contaPoupanca = findContaByCodigo(codigo);
+
+        if (!(contaPoupanca instanceof ContaPoupanca)) {
+            throw (new Erros().new TipoIncorreto());
+        }
+
+        ((ContaPoupanca) contaPoupanca).calcularRendimento();
     }
 
     private static void depositar() {
@@ -119,15 +132,14 @@ public class Contas {
 
         contaBancaria.sacar(valor);
     }
-    
-    
+
     private static float inserirValorConta() {
         System.out.println("Valor : ");
         int codigo = entrada.nextInt();
         entrada.nextLine();
         return codigo;
     }
-    
+
     private static ContaBancaria findContaByCodigo(int codigo) {
         for (ContaBancaria conta : contas) {
             if (conta.getCodigo() == codigo) {
@@ -136,13 +148,13 @@ public class Contas {
         }
 
         throw (new Erros()).new ContaNaoEncontrada();
-        
+
     }
-    
-    private static void listarContas(){
-        contas.forEach(c-> {
+
+    private static void listarContas() {
+        contas.forEach(c -> {
             System.out.println(c);
-        });   
+        });
     }
 
 }

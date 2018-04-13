@@ -51,5 +51,13 @@ public class Erros extends RuntimeException {
         }
 
     }
+    public class TipoIncorreto extends Erros {
+
+        public TipoIncorreto() {
+            super("Tipo de conta incorreto para a operacão !");
+
+        }
+
+    }
 
 }
