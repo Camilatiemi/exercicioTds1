@@ -21,7 +21,8 @@ public class Contas {
                 + "  || 3 - Cadastrar Conta Especial"
                 + "  || 4 - Depositar"
                 + "  || 5 - Sacar"
-                + "  || 6 - Listar"
+                + "  || 6 - Rendimento Poupanca"
+                + "  || 7 - Listar"
                 + "  || 0 - Sair");
 
         int opcao = -1;
